@@ -22,7 +22,7 @@ export async function OPTIONS(request: NextRequest) {
 
 export async function POST(req: NextRequest) {
 
-  const responseType = 'PARTIAL_ERROR';
+  const responseType = 'PARTIAL_ERROR'; // Change this to 'SUCCESS', 'FAILED', or 'PARTIAL_ERROR' to test different responses
 
   try {
     const formData = await req.formData();
@@ -119,7 +119,7 @@ export async function POST(req: NextRequest) {
         JSON.stringify({
           status: 'PARTIAL_ERROR',
           message: 'There are errors in some rows',
-          errorData: {
+          data: {
             headers: [...headers, 'Error'],
             rows: rows.map((row, index) => ({
               ...row,
