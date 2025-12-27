@@ -1,0 +1,6 @@
+projectKey=Test-Tvs
+serverUrl=http://localhost:9000
+serverVersion=25.10.0.114319
+dashboardUrl=http://localhost:9000/dashboard?id=Test-Tvs
+ceTaskId=fc8f0cf9-a48d-4bf5-a9e2-eeba6c736d3f
+ceTaskUrl=http://localhost:9000/api/ce/task?id=fc8f0cf9-a48d-4bf5-a9e2-eeba6c736d3f
