@@ -1,33 +1,123 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Finance Calculator - Next.js with React 19 & Internationalization
+
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app), enhanced with React 19 and comprehensive internationalization support.
+
+## 🌍 Internationalization (i18n)
+
+This project includes a complete i18n setup with support for:
+- **English (en)** - Default language
+- **Spanish (es)**
+- **French (fr)**
+- **German (de)**
+
+### Features
+- ✅ Client-side translations with react-i18next
+- ✅ Automatic language detection from browser/localStorage
+- ✅ Language switcher component
+- ✅ TypeScript support
+- ✅ Fallback language support
+- ✅ Comprehensive test coverage
+
+### Quick Start with I18n
+Visit `/i18n-demo` to see the internationalization features in action!
 
 ## Getting Started
 
-First, run the development server:
+First, install dependencies and run the development server:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application runs on port 3002: [http://localhost:3002](http://localhost:3002)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Using Translations
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+In any client component:
 
-## Learn More
+```tsx
+'use client';
+import { useTranslation } from 'react-i18next';
 
-To learn more about Next.js, take a look at the following resources:
+function MyComponent() {
+  const { t } = useTranslation();
+  
+  return (
+    <div>
+      <h1>{t('common.welcome')}</h1>
+      <button>{t('common.save')}</button>
+    </div>
+  );
+}
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Language Switcher
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```tsx
+import SimpleLanguageSwitcher from '@/components/SimpleLanguageSwitcher';
+
+function Header() {
+  return (
+    <header>
+      <SimpleLanguageSwitcher />
+    </header>
+  );
+}
+```
+
+## 🧪 Testing
+
+```bash
+npm test              # Run all tests
+npm run test:watch    # Watch mode
+npm run test:coverage # With coverage report
+```
+
+The i18n setup includes comprehensive tests in `/src/components/__tests__/I18n.test.tsx`.
+
+## 📁 Project Structure
+
+```
+src/
+├── app/                    # Next.js App Router
+│   ├── i18n-demo/         # I18n demonstration page
+│   └── ...
+├── components/             # React components
+│   ├── SimpleLanguageSwitcher.tsx
+│   ├── I18nDemo.tsx
+│   └── __tests__/         # Component tests
+├── lib/
+│   └── i18n.ts            # i18n configuration
+├── providers/
+│   └── I18nProvider.tsx   # i18n React provider
+├── hooks/
+│   └── useI18n.ts         # Custom i18n hook
+└── types/
+    └── i18n.ts            # TypeScript definitions
+
+public/locales/             # Translation files (optional)
+├── en/common.json
+├── es/common.json
+├── fr/common.json
+└── de/common.json
+```
+
+## 🚀 Technologies
+
+- **Next.js 15.4.6** with App Router
+- **React 19** with latest features
+- **TypeScript** for type safety
+- **Tailwind CSS** for styling
+- **i18next & react-i18next** for internationalization
+- **Jest & Testing Library** for testing
+- **Redux Toolkit** for state management
+
+## 📚 Learn More
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [React i18next Documentation](https://react.i18next.com/)
+- [Detailed I18n Setup Guide](./docs/i18n-setup.md)
 
 ## Deploy on Vercel
 

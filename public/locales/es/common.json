@@ -1,0 +1,35 @@
+{
+  "common": {
+    "welcome": "Bienvenido",
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "add": "Añadir",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "home": "Inicio",
+    "about": "Acerca de",
+    "contact": "Contacto",
+    "language": "Idioma"
+  },
+  "navigation": {
+    "home": "Inicio",
+    "test": "Prueba",
+    "expression": "Expresión",
+    "timer": "Temporizador",
+    "infinite-scroll": "Desplazamiento Infinito",
+    "web-components": "Componentes Web"
+  },
+  "finance": {
+    "title": "Calculadora Financiera",
+    "tax_calculation": "Cálculo de Impuestos",
+    "income": "Ingresos",
+    "tax_rate": "Tasa de Impuestos",
+    "calculate": "Calcular",
+    "result": "Resultado"
+  }
+}

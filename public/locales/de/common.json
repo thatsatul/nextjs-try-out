@@ -1,0 +1,35 @@
+{
+  "common": {
+    "welcome": "Willkommen",
+    "loading": "Lädt...",
+    "error": "Fehler",
+    "success": "Erfolg",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "add": "Hinzufügen",
+    "search": "Suchen",
+    "filter": "Filtern",
+    "home": "Startseite",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "language": "Sprache"
+  },
+  "navigation": {
+    "home": "Startseite",
+    "test": "Test",
+    "expression": "Ausdruck",
+    "timer": "Timer",
+    "infinite-scroll": "Unendliches Scrollen",
+    "web-components": "Web-Komponenten"
+  },
+  "finance": {
+    "title": "Finanzrechner",
+    "tax_calculation": "Steuerberechnung",
+    "income": "Einkommen",
+    "tax_rate": "Steuersatz",
+    "calculate": "Berechnen",
+    "result": "Ergebnis"
+  }
+}

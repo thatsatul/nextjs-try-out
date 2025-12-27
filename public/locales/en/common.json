@@ -1,0 +1,35 @@
+{
+  "common": {
+    "welcome": "Welcome",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "search": "Search",
+    "filter": "Filter",
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "language": "Language"
+  },
+  "navigation": {
+    "home": "Home",
+    "test": "Test",
+    "expression": "Expression",
+    "timer": "Timer",
+    "infinite-scroll": "Infinite Scroll",
+    "web-components": "Web Components"
+  },
+  "finance": {
+    "title": "Finance Calculator",
+    "tax_calculation": "Tax Calculation",
+    "income": "Income",
+    "tax_rate": "Tax Rate",
+    "calculate": "Calculate",
+    "result": "Result"
+  }
+}
