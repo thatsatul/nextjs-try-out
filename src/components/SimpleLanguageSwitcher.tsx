@@ -1,10 +1,13 @@
 'use client';
 
 import { useTranslation } from 'react-i18next';
+import { useRouter, usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 const SimpleLanguageSwitcher = () => {
   const { i18n } = useTranslation();
+  const router = useRouter();
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
   const languages = [
@@ -17,7 +20,22 @@ const SimpleLanguageSwitcher = () => {
   const currentLanguage = languages.find(lang => lang.code === i18n.language) || languages[0];
 
   const handleLanguageChange = (languageCode: string) => {
+    // Change the i18n language
     i18n.changeLanguage(languageCode);
+    
+    // Navigate to the same path but with new locale
+    const segments = pathname.split('/');
+    const currentLocale = segments[1];
+    
+    // Replace current locale with new one, or add it if none exists
+    if (currentLocale && ['en', 'es', 'fr', 'de'].includes(currentLocale)) {
+      segments[1] = languageCode;
+    } else {
+      segments.splice(1, 0, languageCode);
+    }
+    
+    const newPath = segments.join('/');
+    router.push(newPath);
     setIsOpen(false);
   };
 
