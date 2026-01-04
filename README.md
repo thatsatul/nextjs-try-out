@@ -2,24 +2,28 @@
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app), enhanced with React 19 and comprehensive internationalization support.
 
-## 🌍 Internationalization (i18n)
+## 🌍 Internationalization (i18n) with URL Routing
 
-This project includes a complete i18n setup with support for:
-- **English (en)** - Default language
-- **Spanish (es)**
-- **French (fr)**
-- **German (de)**
+This project includes a complete i18n setup with URL-based language routing:
+- **English (en)** - `/en` - Default language
+- **Spanish (es)** - `/es`
+- **French (fr)** - `/fr`  
+- **German (de)** - `/de`
 
 ### Features
+- ✅ URL-based language routing (`/en/home`, `/es/test`, etc.)
+- ✅ Automatic language detection and redirection
+- ✅ Language switcher component with URL navigation
 - ✅ Client-side translations with react-i18next
-- ✅ Automatic language detection from browser/localStorage
-- ✅ Language switcher component
-- ✅ TypeScript support
-- ✅ Fallback language support
+- ✅ Middleware-based locale handling
+- ✅ TypeScript support with type-safe utilities
 - ✅ Comprehensive test coverage
 
 ### Quick Start with I18n
-Visit `/i18n-demo` to see the internationalization features in action!
+- Root URL: `http://localhost:3002/` → Redirects to your preferred language
+- English: `http://localhost:3002/en`
+- Spanish: `http://localhost:3002/es`  
+- I18n Demo: `http://localhost:3002/en/i18n-demo`
 
 ## Getting Started
 
@@ -32,27 +36,32 @@ npm run dev
 
 The application runs on port 3002: [http://localhost:3002](http://localhost:3002)
 
-### Using Translations
+### Using Translations with URL Routing
 
-In any client component:
+In any client page component:
 
 ```tsx
 'use client';
 import { useTranslation } from 'react-i18next';
 
-function MyComponent() {
+interface PageProps {
+  params: { locale: string };
+}
+
+function MyPage({ params }: PageProps) {
   const { t } = useTranslation();
+  const { locale } = params;
   
   return (
     <div>
       <h1>{t('common.welcome')}</h1>
-      <button>{t('common.save')}</button>
+      <p>Current locale: {locale}</p>
     </div>
   );
 }
 ```
 
-### Language Switcher
+### Language Switcher with URL Navigation
 
 ```tsx
 import SimpleLanguageSwitcher from '@/components/SimpleLanguageSwitcher';
@@ -81,12 +90,23 @@ The i18n setup includes comprehensive tests in `/src/components/__tests__/I18n.t
 ```
 src/
 ├── app/                    # Next.js App Router
-│   ├── i18n-demo/         # I18n demonstration page
-│   └── ...
-├── components/             # React components
-│   ├── SimpleLanguageSwitcher.tsx
+│   ├── [locale]/          # Dynamic locale routes
+│   │   ├── layout.tsx     # Locale-specific layout  
+│   │   ├── page.tsx       # Homepage with locale param
+│   │   ├── home/          # Locale-aware pages
+│   │   ├── test/
+│   │   └── i18n-demo/
+│   ├── layout.tsx         # Root layout with I18nProvider
+│   └── page.tsx           # Root redirect page
+├── middleware.ts          # Locale detection & redirection
+├── components/            # React components
+│   ├── SimpleLanguageSwitcher.tsx  # URL-aware language switcher
 │   ├── I18nDemo.tsx
 │   └── __tests__/         # Component tests
+├── utils/
+│   ├── locale.ts          # Type-safe locale utilities
+│   └── __tests__/
+│       └── locale.test.ts # Locale utilities tests
 ├── lib/
 │   └── i18n.ts            # i18n configuration
 ├── providers/
