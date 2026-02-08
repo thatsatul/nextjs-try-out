@@ -1,17 +1,17 @@
 'use client';
 
-import React from 'react';
+import React, { use } from 'react';
 import HomeContainer from '@/containers/HomeContainer';
 import SimpleLanguageSwitcher from '@/components/SimpleLanguageSwitcher';
 import { useTranslation } from 'react-i18next';
 
 interface HomePageProps {
-    params: { locale: string };
+    params: Promise<{ locale: string }>;
 }
 
 const HomePage: React.FC<HomePageProps> = ({ params }) => {
     const { t } = useTranslation();
-    const { locale } = params;
+    const { locale } = use(params);
 
     return (
         <div className="min-h-screen p-8">
