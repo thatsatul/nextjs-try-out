@@ -1,18 +1,18 @@
 'use client';
 
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, use } from 'react';
 import { useTranslation } from 'react-i18next';
 import { notFound } from 'next/navigation';
 
 interface LocaleLayoutProps {
   children: ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }
 
 const locales = new Set(['en', 'es', 'fr', 'de']);
 
 export default function LocaleLayout({ children, params }: LocaleLayoutProps) {
-  const { locale } = params;
+  const { locale } = use(params);
   const { i18n } = useTranslation();
 
   // Validate locale

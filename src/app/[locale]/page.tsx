@@ -4,13 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import SimpleLanguageSwitcher from "@/components/SimpleLanguageSwitcher";
 import { useTranslation } from "react-i18next";
+import { use } from "react";
 
 interface HomeProps {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }
 
 export default function Home({ params }: HomeProps) {
-  const { locale } = params;
+  const { locale } = use(params);
   const { t } = useTranslation();
   
   return (
@@ -56,10 +57,22 @@ export default function Home({ params }: HomeProps) {
             {t('navigation.timer')}
           </Link>
           <Link
+            href={`/${locale}/gemini`}
+            className="flex items-center justify-center px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition-colors"
+          >
+            🤖 Gemini AI
+          </Link>
+          <Link
             href={`/${locale}/i18n-demo`}
             className="flex items-center justify-center px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors"
           >
             I18n Demo
+          </Link>
+          <Link
+            href={`/${locale}/csvStream`}
+            className="flex items-center justify-center px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors"
+          >
+            📊 CSV Stream
           </Link>
         </div>
         

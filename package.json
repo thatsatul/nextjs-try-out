@@ -13,6 +13,7 @@
     "test:coverage:watch": "jest --coverage --watch"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "@reduxjs/toolkit": "^2.8.2",
     "@types/papaparse": "^5.3.16",
     "cors": "^2.8.5",
