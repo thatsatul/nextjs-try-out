@@ -132,6 +132,36 @@ public/locales/             # Translation files (optional)
 - **i18next & react-i18next** for internationalization
 - **Jest & Testing Library** for testing
 - **Redux Toolkit** for state management
+- **Google Gemini AI** for chat and content generation
+- **Replicate AI** for advanced face-swapping
+- **Pollinations AI** for image generation
+
+## 🎨 AI Features
+
+### 1. Gemini AI Chat (`/gemini`)
+- Interactive AI chat powered by Google's Gemini 2.5 Flash
+- Real-time responses with streaming support
+- Markdown rendering for formatted responses
+
+### 2. AI Image Generator (`/image-prompt`)
+- Text-to-image generation using Pollinations AI
+- High-quality 1024x1024 images
+- Instant generation from text descriptions
+
+### 3. AI Face Swap Generator (`/face-image`) ⭐ NEW!
+- Upload two photos and create AI-generated scenes with your actual faces
+- Powered by Replicate's face-swap technology
+- Perfect for creating personalized couple photos, family portraits, etc.
+
+**Setup Required**: See [FACE_SWAP_SETUP.md](./FACE_SWAP_SETUP.md) for instructions on getting your free Replicate API token.
+
+**Example Use Cases**:
+- Create romantic couple photos in dreamy locations
+- Generate professional family portraits
+- Place yourself and friends in historical scenes
+- Create fun, creative scenarios with swapped faces
+
+**Processing**: Takes 20-40 seconds per image (AI scene generation + 2 face swaps)
 
 ## 📚 Learn More
 
