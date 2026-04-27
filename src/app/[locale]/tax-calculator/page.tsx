@@ -1,6 +1,21 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+
+// ─── LocalStorage persistence ────────────────────────────────────
+const STORAGE_KEY = 'tax_calculator_inputs';
+
+function loadFromStorage<T>(key: string, fallback: T): T {
+  if (globalThis.window === undefined) return fallback;
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return fallback;
+    const data = JSON.parse(raw) as Record<string, unknown>;
+    return key in data ? (data[key] as T) : fallback;
+  } catch {
+    return fallback;
+  }
+}
 
 // ─── Tax slab types ───────────────────────────────────────────────
 interface Slab {
@@ -212,25 +227,36 @@ function ResultCard({
 
 // ─── Main page ────────────────────────────────────────────────────
 export default function TaxCalculatorPage() {
-  const [grossSalary, setGrossSalary] = useState<number>(0);
+  const [grossSalary, setGrossSalary] = useState<number>(() => loadFromStorage('grossSalary', 0));
 
   // Old regime deductions
-  const [sec80C,  setSec80C]  = useState(0);
-  const [sec80D,  setSec80D]  = useState(0);
-  const [monthlyRent, setMonthlyRent] = useState(0);  // for HRA calculation
-  const [actualHraReceived, setActualHraReceived] = useState(0); // annual HRA received from employer
-  const [isMetro, setIsMetro] = useState(true);        // metro = 50% of basic, non-metro = 40%
-  const [lta,     setLta]     = useState(0);
-  const [other80, setOther80] = useState(0);
+  const [sec80C,  setSec80C]  = useState(() => loadFromStorage('sec80C', 0));
+  const [sec80D,  setSec80D]  = useState(() => loadFromStorage('sec80D', 0));
+  const [monthlyRent, setMonthlyRent] = useState(() => loadFromStorage('monthlyRent', 0));
+  const [actualHraReceived, setActualHraReceived] = useState(() => loadFromStorage('actualHraReceived', 0));
+  const [isMetro, setIsMetro] = useState(() => loadFromStorage('isMetro', true));
+  const [lta,     setLta]     = useState(() => loadFromStorage('lta', 0));
+  const [other80, setOther80] = useState(() => loadFromStorage('other80', 0));
 
   // Employer NPS % — available in both regimes (Sec 80CCD(2))
-  const [npsNewPct, setNpsNewPct] = useState(0); // max 14% in new regime
-  const [npsOldPct, setNpsOldPct] = useState(0); // max 10% in old regime
+  const [npsNewPct, setNpsNewPct] = useState(() => loadFromStorage('npsNewPct', 0));
+  const [npsOldPct, setNpsOldPct] = useState(() => loadFromStorage('npsOldPct', 0));
 
   // Additional income sources
-  const [otherIncome, setOtherIncome]               = useState(0); // annual (business, interest, etc.)
-  const [monthlyRentalIncome, setMonthlyRentalIncome] = useState(0); // monthly rent received
-  const [rentalHomeLoanInterest, setRentalHomeLoanInterest] = useState(0); // annual home loan interest on rental property (Sec 24(b))
+  const [otherIncome, setOtherIncome]               = useState(() => loadFromStorage('otherIncome', 0));
+  const [monthlyRentalIncome, setMonthlyRentalIncome] = useState(() => loadFromStorage('monthlyRentalIncome', 0));
+  const [rentalHomeLoanInterest, setRentalHomeLoanInterest] = useState(() => loadFromStorage('rentalHomeLoanInterest', 0));
+
+  // ── Persist inputs to localStorage ───────────────────────────
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      grossSalary, sec80C, sec80D, monthlyRent, actualHraReceived,
+      isMetro, lta, other80, npsNewPct, npsOldPct,
+      otherIncome, monthlyRentalIncome, rentalHomeLoanInterest,
+    }));
+  }, [grossSalary, sec80C, sec80D, monthlyRent, actualHraReceived,
+      isMetro, lta, other80, npsNewPct, npsOldPct,
+      otherIncome, monthlyRentalIncome, rentalHomeLoanInterest]);
 
   const results = useMemo(() => {
     if (!grossSalary) return null;
